@@ -1,7 +1,9 @@
 const REPORT = require('./api/models/report') //created model loading here --- Why does the app break if I remove????? it breaks if put after the routes(app)	
+
 const mongoose = require('mongoose')
 	mongoose.Promise = global.Promise
 	mongoose.connect('mongodb://localhost/Reportdb', { useNewUrlParser: true }) 
+
 const express = require('express')
 	const app = express()
 		const PORT = process.env.PORT || 3000
@@ -12,12 +14,15 @@ const express = require('express')
 		app.use(function(req, res) {
 		  res.status(404).send({url: req.originalUrl + ' not found'})
 		});
+
 const routes = require('./api/routes/reportRoutes'); //importing route
 	routes(app); //register the route
+
 const cron = require("node-cron")
 	cron.schedule("* * * * *", function() {
 		const Reports = require('./api/controllers/reportController')
 			Reports.crawl2()
 	});
+
 console.log('Report RESTful API server started on: ' + PORT);
 
