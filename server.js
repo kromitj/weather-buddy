@@ -6,9 +6,9 @@ const mongoose = require('mongoose')
 
 
 const express = require('express')
+	const routes = require('./api/routes/reportRoutes'); //importing route
 	const app = express()
-		const routes = require('./api/routes/reportRoutes'); //importing route
-			routes(app); //register the route
+		routes(app); //register the route
 		const PORT = process.env.PORT || 3000
 			app.listen(PORT)
 		const bodyParser = require('body-parser')
