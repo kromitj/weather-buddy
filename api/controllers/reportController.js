@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const Report = mongoose.model('Reports')
 const Crawler = require('../../crawler/reportCrawler')
 
-exports.crawl2 = function() {
+exports.crawl2 = function(crawlStrategy) {
   const crawler = new Crawler()
 	  crawler.crawl(function(html) {
 	  	 // var newReport = new Report(html);
