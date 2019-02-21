@@ -22,7 +22,10 @@ const ReportSchema = new Schema({
 	baseCondition: {
 		type: String,
 	},
-	percipitation: {
+	cloudCover: {
+		type: String
+	},
+	precipitation: {
 		type: Number
 	},
 	futureTempLow24: {

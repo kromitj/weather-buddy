@@ -7,13 +7,13 @@ const Crawler = require('../../crawler/reportCrawler')
 exports.crawl = function(req, res) {
   const crawler = new Crawler()
   crawler.crawl(function(html) {
-  	 var newReport = new Report(html);
-  	 console.log(html)
-	  newReport.save(function(err, report) {
-	    if (err)
-	      res.send(err);
-	    res.json(report);
-	  });
+  	 // var newReport = new Report(html);
+  	 res.send(html)
+	  // newReport.save(function(err, report) {
+	  //   if (err)
+	  //     res.send(err);
+	  //   res.json(html);
+	  // });
   })
 };
 exports.showAll = function(req, res) {
