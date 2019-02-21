@@ -18,7 +18,7 @@ const routes = require('./api/routes/reportRoutes'); //importing route
 
 const mongoose = require('mongoose')
 	mongoose.Promise = global.Promise
-  mongoose.connect('mongodb://localhost/Reportdb', { useNewUrlParser: true })   
+	mongoose.connect('mongodb://localhost/Reportdb', { useNewUrlParser: true })   
 
 const Reports = require('./api/controllers/reportController')
 
