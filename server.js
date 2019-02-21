@@ -26,11 +26,11 @@ const mongoose = require('mongoose')
 	mongoose.connect('mongodb://localhost/Reportdb', { useNewUrlParser: true }) 
 
 
-const Reports = require('./api/controllers/reportController')
 	const cron = require("node-cron")
-	cron.schedule("* * * * *", function() {
-		Reports.crawl2()
-	});
+		cron.schedule("* * * * *", function() {
+			const Reports = require('./api/controllers/reportController')
+				Reports.crawl2()
+		});
 
 
 console.log('Report RESTful API server started on: ' + PORT);
