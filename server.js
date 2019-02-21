@@ -1,31 +1,31 @@
-var express = require('express'),
-  port = process.env.PORT || 3000,
-  app = express(),
-  mongoose = require('mongoose'),
-  bodyParser = require('body-parser');
-  const cron = require("node-cron");
-  Report = require('./api/models/report'), //created model loading here
-  
-// mongoose instance connection url connection
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/Reportdb', { useNewUrlParser: true }); 
+const PORT = process.env.PORT || 3000
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+const bodyParser = require('body-parser')
+const cron = require("node-cron")
 
-cron.schedule("* * * * *", function() {
-	// this will run a crawl script that fectch then creates a new Report instance from the data
-  console.log("Crawling for weeather reports");
-});
+const express = require('express')
+const app = express()
+	app.use(bodyParser.json())
+	app.use(function(req, res) {
+	  res.status(404).send({url: req.originalUrl + ' not found'})
+	});
+	app.listen(PORT)
+	app.use(bodyParser.urlencoded({ extended: true }))
 
-var routes = require('./api/routes/reportRoutes'); //importing route
-routes(app); //register the route
+const routes = require('./api/routes/reportRoutes'); //importing route
+const Report = require('./api/models/report') //created model loading here --- Why does the app break if I remove?????
+// it breaks if put after the routes(app)
+	routes(app); //register the route
 
-app.use(function(req, res) {
-  res.status(404).send({url: req.originalUrl + ' not found'})
-});
+const mongoose = require('mongoose')
+	mongoose.Promise = global.Promise
+  mongoose.connect('mongodb://localhost/Reportdb', { useNewUrlParser: true })   
 
-app.listen(port);
+const Reports = require('./api/controllers/reportController')
+	cron.schedule("* * * * *", function() {
+		// this will run a crawl script that fectch then creates a new Report instance from the data
+		Reports.crawl2()
+	});
+	
+console.log('Report RESTful API server started on: ' + PORT);
 
-
-console.log('Report RESTful API server started on: ' + port);
