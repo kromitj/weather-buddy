@@ -11,18 +11,17 @@ const express = require('express')
 		  res.status(404).send({url: req.originalUrl + ' not found'})
 		});
 
-	const routes = require('./api/routes/reportRoutes'); //importing route
-		routes(app); //register the route
+const routes = require('./api/routes/reportRoutes'); //importing route
+	routes(app); //register the route
 
-	const mongoose = require('mongoose')
-		mongoose.Promise = global.Promise
-		mongoose.connect('mongodb://localhost/Reportdb', { useNewUrlParser: true }) 
+const mongoose = require('mongoose')
+	mongoose.Promise = global.Promise
+	mongoose.connect('mongodb://localhost/Reportdb', { useNewUrlParser: true }) 
 
-	const cron = require("node-cron")
-		cron.schedule("* * * * *", function() {
-			const Reports = require('./api/controllers/reportController')
-			Reports.crawl2()
-		});
-
-	console.log('Report RESTful API server started on: ' + PORT);
+const cron = require("node-cron")
+	cron.schedule("* * * * *", function() {
+		const Reports = require('./api/controllers/reportController')
+		Reports.crawl2()
+	});
+console.log('Report RESTful API server started on: ' + PORT);
 
