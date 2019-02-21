@@ -1,8 +1,8 @@
-const REPORT = require('./api/models/report') //created model loading here --- Why does the app break if I remove????? it breaks if put after the routes(app)	
-
 const mongoose = require('mongoose')
 	mongoose.Promise = global.Promise
 	mongoose.connect('mongodb://localhost/Reportdb', { useNewUrlParser: true }) 
+const REPORT = require('./api/models/report') //created model loading here --- Why does the app break if I remove????? it breaks if put after the routes(app)	
+
 
 const express = require('express')
 	const app = express()
