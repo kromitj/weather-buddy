@@ -1,17 +1,17 @@
 const PORT = process.env.PORT || 3000
+const REPORT = require('./api/models/report') //created model loading here --- Why does the app break if I remove????? it breaks if put after the routes(app)
 
 const express = require('express')
 	const app = express()
-	const bodyParser = require('body-parser')
 		app.listen(PORT)
 
+		const bodyParser = require('body-parser')
 		app.use(bodyParser.json())
 		app.use(bodyParser.urlencoded({ extended: true }))
+		
 		app.use(function(req, res) {
 		  res.status(404).send({url: req.originalUrl + ' not found'})
 		});
-
-const Report = require('./api/models/report') //created model loading here --- Why does the app break if I remove????? it breaks if put after the routes(app)
 
 const routes = require('./api/routes/reportRoutes'); //importing route
 	routes(app); //register the route
@@ -21,10 +21,8 @@ const mongoose = require('mongoose')
 	mongoose.connect('mongodb://localhost/Reportdb', { useNewUrlParser: true })   
 
 const Reports = require('./api/controllers/reportController')
-
-const cron = require("node-cron")
+	const cron = require("node-cron")
 	cron.schedule("* * * * *", function() {
-		// this will run a crawl script that fectch then creates a new Report instance from the data
 		Reports.crawl2()
 	});
 
