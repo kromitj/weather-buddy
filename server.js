@@ -9,8 +9,8 @@ const REPORT = require('./api/models/report') //created model loading here --- W
 			app.use(function(req, res) {
 				  res.status(404).send({url: req.originalUrl + ' not found'})
 			});
-			const routes = require('./api/routes/reportRoutes'); //importing route
-				routes(app); //register the route
+	const routes = require('./api/routes/reportRoutes'); //importing route
+		routes(app); //register the route
 	const mongoose = require('mongoose')
 		mongoose.Promise = global.Promise
 		mongoose.connect('mongodb://localhost/Reportdb', { useNewUrlParser: true }) 
