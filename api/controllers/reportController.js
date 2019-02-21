@@ -1,23 +1,21 @@
 'use strict';
 
-
 const mongoose = require('mongoose')
 const Report = mongoose.model('Reports')
 const Crawler = require('../../crawler/reportCrawler')
 
-
 exports.crawl2 = function() {
   const crawler = new Crawler()
-  crawler.crawl(function(html) {
-  	 // var newReport = new Report(html);
-  	 // res.send(html)
-  	 console.log("Crawled steamboat.com, returned: ", html.length, " bytes")
-	  // newReport.save(function(err, report) {
-	  //   if (err)
-	  //     res.send(err);
-	  //   res.json(html);
-	  // });
-  })
+	  crawler.crawl(function(html) {
+	  	 // var newReport = new Report(html);
+	  	 // res.send(html)
+	  	 console.log("Crawled steamboat.com, returned: ", html.length, " bytes")
+		  // newReport.save(function(err, report) {
+		  //   if (err)
+		  //     res.send(err);
+		  //   res.json(html);
+		  // });
+	  })
 };
 
 exports.crawl = function(req, res) {
@@ -32,6 +30,7 @@ exports.crawl = function(req, res) {
 	  // });
   })
 };
+
 exports.showAll = function(req, res) {
   Report.find({}, function(err, report) {
     if (err)
