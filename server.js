@@ -14,7 +14,6 @@ const express = require('express')
 		app.use(function(req, res) {
 		  res.status(404).send({url: req.originalUrl + ' not found'})
 		});
-
 	const routes = require('./api/routes/reportRoutes'); //importing route
 		routes(app); //register the route
 
