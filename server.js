@@ -17,7 +17,7 @@ const routes = require('./api/routes/reportRoutes'); //importing route
 const cron = require("node-cron")
 	cron.schedule("* * * * *", function() {
 		const Reports = require('./api/controllers/reportController')
-		Reports.crawl2()
+			Reports.crawl2()
 	});
-	console.log('Report RESTful API server started on: ' + PORT);
+console.log('Report RESTful API server started on: ' + PORT);
 
