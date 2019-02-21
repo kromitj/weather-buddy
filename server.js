@@ -4,13 +4,11 @@ const express = require('express')
 
 
 const app = express()
-	const bodyParser = require('body-parser')
+	app.listen(PORT)
 
+	const bodyParser = require('body-parser')
 	app.use(bodyParser.json())
 	app.use(bodyParser.urlencoded({ extended: true }))
-
-	app.listen(PORT)			
-
 	app.use(function(req, res) {
 	  res.status(404).send({url: req.originalUrl + ' not found'})
 	});
@@ -27,6 +25,6 @@ const cron = require("node-cron")
 		const Reports = require('./api/controllers/reportController')
 		Reports.crawl2()
 	});
-	
+
 console.log('Report RESTful API server started on: ' + PORT);
 
