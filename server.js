@@ -4,7 +4,6 @@ const PORT = process.env.PORT || 3000
 const REPORT = require('./api/models/report') //created model loading here --- Why does the app break if I remove????? it breaks if put after the routes(app)
 
 
-const routes = require('./api/routes/reportRoutes'); //importing route
 	const express = require('express')
 		const app = express()
 			const bodyParser = require('body-parser')
@@ -18,7 +17,8 @@ const routes = require('./api/routes/reportRoutes'); //importing route
 			  res.status(404).send({url: req.originalUrl + ' not found'})
 			});
 
-routes(app); //register the route
+const routes = require('./api/routes/reportRoutes'); //importing route
+	routes(app); //register the route
 
 
 const mongoose = require('mongoose')
