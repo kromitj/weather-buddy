@@ -3,7 +3,6 @@ const REPORT = require('./api/models/report') //created model loading here --- W
 const express = require('express')
 
 	const app = express()
-
 		app.listen(PORT)
 		const bodyParser = require('body-parser')
 		app.use(bodyParser.json())
@@ -24,7 +23,7 @@ const express = require('express')
 			const Reports = require('./api/controllers/reportController')
 			Reports.crawl2()
 		});
-		
+
 
 	console.log('Report RESTful API server started on: ' + PORT);
 
