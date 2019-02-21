@@ -4,30 +4,29 @@ const mongoose = require('mongoose')
 const Report = mongoose.model('Reports')
 const Crawler = require('../../crawler/reportCrawler')
 
-exports.crawl2 = function(crawlStrategy) {
+exports.crawl2 = function() {
   const crawler = new Crawler()
-	  crawler.crawl(function(html) {
-	  	 // var newReport = new Report(html);
-	  	 // res.send(html)
-	  	 console.log("Crawled steamboat.com, returned: ", html.length, " bytes")
-		  // newReport.save(function(err, report) {
-		  //   if (err)
-		  //     res.send(err);
-		  //   res.json(html);
-		  // });
-	  })
-};
+  crawler.crawl(function(html) {
+  	 var newReport = new Report(html);
+  	 // res.send(html)
+	  newReport.save(function(err, report) {
+	    if (err)
+	      console.log(err)
+	    console.log(newReport)
+	  });
+  })
+}
 
 exports.crawl = function(req, res) {
   const crawler = new Crawler()
   crawler.crawl(function(html) {
-  	 // var newReport = new Report(html);
-  	 res.send(html)
-	  // newReport.save(function(err, report) {
-	  //   if (err)
-	  //     res.send(err);
-	  //   res.json(html);
-	  // });
+  	 var newReport = new Report(html);
+  	 // res.send(html)
+	  newReport.save(function(err, report) {
+	    if (err)
+	      res.send(err);
+	    res.json(html);
+	  });
   })
 };
 
