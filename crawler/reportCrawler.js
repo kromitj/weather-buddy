@@ -2,6 +2,7 @@ class ReportCrawler{
 	constructor() {
    
   }
+  
   crawl(callback) {
 		const rp = require('request-promise');
 		const url = 'https://www.steamboat.com/';

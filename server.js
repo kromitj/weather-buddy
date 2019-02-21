@@ -1,8 +1,9 @@
+
 const mongoose = require('mongoose')
 	mongoose.Promise = global.Promise
 	mongoose.connect('mongodb://localhost/Reportdb', { useNewUrlParser: true }) 
-
 		const REPORT = require('./api/models/report') //created model loading here --- Why does the app break if I remove????? it breaks if put after the routes(app)	
+
 
 const express = require('express')
 	const app = express()
@@ -11,12 +12,12 @@ const express = require('express')
 		const bodyParser = require('body-parser')
 			app.use(bodyParser.json())
 			app.use(bodyParser.urlencoded({ extended: true }))
-		app.use(function(req, res) {
-		  res.status(404).send({url: req.originalUrl + ' not found'})
-		});
+				const routes = require('./api/routes/reportRoutes'); //importing route
+					routes(app); //register the route
+			app.use(function(req, res) {
+			  res.status(404).send({url: req.originalUrl + ' not found'})
+			});
 		
-	const routes = require('./api/routes/reportRoutes'); //importing route
-		routes(app); //register the route
 
 const cron = require("node-cron")
 	cron.schedule("* * * * *", function() {
@@ -25,4 +26,3 @@ const cron = require("node-cron")
 	});
 
 console.log('Report  API server started on: ' + PORT);
-
