@@ -1,8 +1,8 @@
 const PORT = process.env.PORT || 3000
 const REPORT = require('./api/models/report') //created model loading here --- Why does the app break if I remove????? it breaks if put after the routes(app)
 	const express = require('express')
+		const bodyParser = require('body-parser')
 		const app = express()
-			const bodyParser = require('body-parser')
 				app.use(bodyParser.json())
 				app.use(bodyParser.urlencoded({ extended: true }))
 				app.listen(PORT)			
