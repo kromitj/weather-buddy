@@ -9,13 +9,13 @@ const express = require('express')
 	const routes = require('./api/routes/reportRoutes'); //importing route
 	const app = express()
 		routes(app); //register the route
-			const PORT = process.env.PORT || 3000
-				app.listen(PORT)
-			const bodyParser = require('body-parser')
-				app.use(bodyParser.json())
-				app.use(bodyParser.urlencoded({ extended: true }))
-				app.use(function(req, res) {
-			  	res.status(404).send({url: req.originalUrl + ' not found'})
+		const PORT = process.env.PORT || 3000
+			app.listen(PORT)
+		const bodyParser = require('body-parser')
+			app.use(bodyParser.json())
+			app.use(bodyParser.urlencoded({ extended: true }))
+			app.use(function(req, res) {
+		  	res.status(404).send({url: req.originalUrl + ' not found'})
 				});
 		
 
