@@ -1,114 +1,33 @@
-*	Get Crawl to work
-	* design a crawlStratagy datastruct
+	const resultNewRecordProps = {
+		currentTemp:	{value: null, format: null},
+		currentTempLow:	null,
+		currentTempHigh:	null,
+		currentWindDirection:	null,
+		currentWindSpeed:	null,
+		baseCondition:	null,
+		cloudCover:	null ,
+		precipitation:	null,
+		pastSnow24:	null,
+		pastSnow48:	null,
+		pastSnow72:	null,
+		pastSnow7:	null,
+		futureTempLow24:	null,
+		futureTempHigh24:	null,
+		futureSnow24:	null,
+		futureTempLow48:	null,
+		futureTempHigh48:	null,
+		futureSnow48:	null,
+		futureTempLow72:	null,
+		futureTempHigh72:	null,
+		futureSnow72:	null
+}	
 
-
-[CrawlReq, CrawlReq,...]
-CrawlReq = {
-	url: String,
-	targets: [
-		{
-			class: String, // ".switchable-stat-imperial"
-			property: String //  Schema prop for Report
-		},
-		...
-	]
-}
-
-
-<!-- example -->
-const crawlStratagy = {
-	url: 'https://www.steamboat.com/',
-	targets: [
-		{			
-			class: ".switchable-stat-imperial", 
-			property: "currentTemp"
-			
-		},
-		{			
-			class: ".head-metric-description", 
-			property: "cloudCover"
+const resultNewRecordProps = {
+	currentTemp:	{
+		value: null, 
+		format: function(prop) {
+			if (!prop) return null
+			return Number(prop)
 		}
-	]
+	}
 }
-
-const targets = [
-	".switchable-stat-imperial", // current
-
-]
-
-const ReportSchema = new Schema({
-	currentTemp: {
-		type: Number,
-		target: "",
-		target: ".switchable-stat-imperial"
-	},
-	currentTempLow: {
-		type: Number,
-		target: "",
-	},
-	currentTempHigh: {
-		type: Number,
-		target: "",
-	},
-	currentWindDirection: {
-		type: Number,
-		target: ".switchable-stat-item",
-	},
-	currentWindSpeed: {
-		type: Number,
-		target: "",
-	},
-	baseCondition: {
-		type: String,
-		target: "",
-	},
-	cloudCover: {
-		type: String
-		target: "",
-	},
-	precipitation: {
-		type: Number
-		target: "",
-	},
-	futureTempLow24: {
-		type: Number,
-		target: "",
-	},
-	futureTempHigh24: {
-		type: Number,
-		target: "",
-	},
-	futureSnow24: {
-		type: Number,
-		target: "",
-	},
-	futureTempLow48: {
-		type: Number,
-		target: "",
-	},
-	futureTempHigh48: {
-		type: Number,
-		target: "",
-	},
-	futureSnow48: {
-		type: Number,
-		target: "",
-	},
-	futureTempLow72: {
-		type: Number,
-		target: "",
-	},
-	futureTempHigh72: {
-		type: Number,
-		target: "",
-	},
-	futureSnow72: {
-		type: Number,
-		target: "",
-	},
-	Created_date: {
-    type: Date,
-    target: "",
-    default: Date.now
-  }
-})

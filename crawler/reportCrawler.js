@@ -1,4 +1,9 @@
+	const secsSinceMid = require('seconds-since-midnight')
+	const toSeconds = secsSinceMid.toSeconds
+	const toReadableTime = secsSinceMid.toReadableTime
+
 	const resultNewRecordProps = {
+		updateTime: null,
 		currentTemp:	null,
 		currentTempLow:	null,
 		currentTempHigh:	null,
@@ -35,6 +40,7 @@ class ReportCrawler{
 					const $ = require('cheerio');
 				  	const weather = $('.conditions-weather', html)
 
+				  	resultNewRecordProps.updateTime = $('.conditions-section-header-updated-time', weather).html()
 				  	resultNewRecordProps.currentTemp = $('.switchable-stat-imperial', weather).html()
 				  	resultNewRecordProps.cloudCover = $('.head-metric-description', weather)[0].children[0].data
 						resultNewRecordProps.baseCondition = $('.weather-snow-top-amount > .switchable-stat > .switchable-stat-imperial', weather)[0].children[0].data
@@ -53,29 +59,30 @@ class ReportCrawler{
 						for (let i = 0; i < futureSnow.length; i++ ) {
 							snowForcast.push(futureSnow[i].children[0].data)
 						}
+						console.log(snowForcast)
 						resultNewRecordProps.futureSnow24 = snowForcast[0]
 						resultNewRecordProps.futureSnow48 = snowForcast[2]
 						resultNewRecordProps.futureSnow72 = snowForcast[4]
 
 						const futureTemps = $('.weather-forecast-list-item-condition-temp > .switchable-stat > span', weather)
 						const forcast = []
-						// console.log(futureTemps)
+						// 
 						for (let i = 0; i < futureTemps.length; i += 2) {
 							// const temp = $('.switchable-stat-imperial',futureTemps[i])
 							forcast.push(futureTemps[i].children[0].data)
 						}	
-						console.log(forcast)
+						
 						resultNewRecordProps.futureTempHigh24 = forcast[0]
 						resultNewRecordProps.futureTempLow24 = forcast[1]
 						resultNewRecordProps.futureTempHigh48 = forcast[2]
 						resultNewRecordProps.futureTempLow48 = forcast[3]
 						resultNewRecordProps.futureTempHigh72 = forcast[4]
 						resultNewRecordProps.futureTempLow72 = forcast[5]
-						console.log(resultNewRecordProps)
+						
 						for (let prop in formater) {
 							const formatedProp = formater[prop](resultNewRecordProps[prop])
 							resultNewRecordProps[prop] = formatedProp
-							// console.log(formatedProp)
+							// 
 						}
 						console.log(resultNewRecordProps)
 						// formatCrawed Data 
@@ -85,13 +92,19 @@ class ReportCrawler{
 			    return callback(err)
 			  })
 		}
-		vetRecordProps(props) {
-
-		}
 }
 
 
 	const formater = {
+		updateTime: function(prop) {
+			if (!prop) return null
+			const hour = prop.slice(0,1)
+			const mins = prop.slice(2, 4)
+			const meridiem = prop.slice(5,7)
+			const secsSinceMidnight = toSeconds(hour, mins, meridiem)
+			const readTIm = toReadableTime(secsSinceMidnight)
+			return secsSinceMidnight
+		},
 		currentTemp:	function(prop) {
 			if (!prop) return null
 			return Number(prop)
@@ -157,7 +170,7 @@ class ReportCrawler{
 		futureTempLow48:	function(prop) {
 			if (!prop || prop == "--") return null
 				const b = prop.slice(3, prop.length-1)
-			console.log("BLah: ", prop, b)
+			
 			return Number(prop.slice(3, prop.length-1))
 		},
 		futureTempHigh48:	function(prop) {
