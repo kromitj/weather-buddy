@@ -5,19 +5,19 @@ const Schema = mongoose.Schema;
 
 const ReportSchema = new Schema({
 	currentTemp: {
-		type: String,
+		type: Number,
 	},
 	currentTempLow: {
-		type: String,
+		type: Number,
 	},
 	currentTempHigh: {
-		type: String,
+		type: Number,
 	},
 	currentWindDirection: {
 		type: String,
 	},
 	currentWindSpeed: {
-		type: String,
+		type: Number,
 	},
 	baseCondition: {
 		type: String,
@@ -26,46 +26,46 @@ const ReportSchema = new Schema({
 		type: String
 	},
 	precipitation: {
-		type: String
+		type: Number
 	},
 	pastSnow24: {
-		type: String
+		type: Number
 	},
 	pastSnow48: {
-		type: String
+		type: Number
 	},
 	pastSnow72: {
-		type: String
+		type: Number
 	},
 	pastSnow7: {
-		type: String
+		type: Number
 	},
 	futureTempLow24: {
-		type: String,
+		type: Number,
 	},
 	futureTempHigh24: {
-		type: String,
+		type: Number,
 	},
 	futureSnow24: {
-		type: String,
+		type: Number,
 	},
 	futureTempLow48: {
-		type: String,
+		type: Number,
 	},
 	futureTempHigh48: {
-		type: String,
+		type: Number,
 	},
 	futureSnow48: {
-		type: String,
+		type: Number,
 	},
 	futureTempLow72: {
-		type: String,
+		type: Number,
 	},
 	futureTempHigh72: {
-		type: String,
+		type: Number,
 	},
 	futureSnow72: {
-		type: String,
+		type: Number,
 	},
 	Created_date: {
     type: Date,
