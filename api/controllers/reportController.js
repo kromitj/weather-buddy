@@ -21,7 +21,6 @@ exports.crawl = function(req, res) {
   const crawler = new Crawler()
   crawler.crawl(function(html) {
   	 var newReport = new Report(html);
-  	 // res.send(html)
 	  newReport.save(function(err, report) {
 	    if (err)
 	      res.send(err);
