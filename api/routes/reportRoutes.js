@@ -10,6 +10,9 @@ module.exports = function(app) {
 
   app.route('/reports/crawl')
   	.get(Reports.crawl)
+  
+  app.route('/reports/current')
+    .get(Reports.current)
 
 
   app.route('/reports/:reportId')

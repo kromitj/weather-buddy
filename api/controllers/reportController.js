@@ -28,8 +28,25 @@ exports.crawl = function(req, res) {
 	  });
   })
 };
+exports.current = function(req, res) {
+  Report.findOne({}, {}, { sort: { 'Created_date' : -1 } }, function(err, report) {
+	  
+	  if (err)
+	      res.send(err);
+	    const packedReport = {}
+	    packedReport.updateTime = report.updateTime
+	    packedReport.currentTemp = report.currentTemp
+	    packedReport.currentWindDirection = report.currentWindDirection
+	    packedReport.currentWindSpeed = report.currentWindSpeed
+	    packedReport.baseCondition = report.baseCondition
+	    packedReport.cloudCover = report.cloudCover
+	    packedReport.pastSnow24 = report.pastSnow24
 
-exports.showAll = function(req, res) {
+	    res.json(packedReport);
+	  });
+};
+
+exports.showAll = function(req, res) {  
   Report.find({}, function(err, report) {
     if (err)
       res.send(err);
